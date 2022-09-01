@@ -1,13 +1,23 @@
 /* Estilos */
+
 * {
     font-family: 'Times New Roman', Times, serif;
     background-color: black;
     color: grey;
     padding: 0rem 1rem;
 }
+
 h1,h2 {
     text-align: center;
 }
+
 h2 {
     padding-bottom: 3rem;
+}
+
+.buttons {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    padding: 2em 5em;
 }
