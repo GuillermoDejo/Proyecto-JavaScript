@@ -1,4 +1,4 @@
-// Pedirle al usuario el precio del producto cuyo IVA se calculara y se sumara al precio del producto.
+// Base de datos de productos.
 
 // Se crea la clase Producto.
 
@@ -15,55 +15,109 @@ class Producto {
     }
 }
 
-var arrayProductos = [];
-do{
-    // Se realiza la comprobacion de los datos ingresados.
-    var comprobacion = prompt("Ingresar el nombre del producto. Ingrese fin para terminar de agregar.");
-    if (comprobacion === "fin" || comprobacion === "FIN" || comprobacion === "Fin"){
-        break;
-    } else{
-    var nombreP = comprobacion;
-    while(true) {
-        var precioP = parseFloat(prompt("Ingresar el precio del producto"));
-        if (precioP <= 0) {
-            alert("El precio ingresado debe ser un numero mayor a 0");
-        } else if(!isNaN(precioP)){
-            break;
-        } else {
-            alert("El registro ingresado no es un numero");
-            continue;
-        }
+// Defino las variables
+
+let arrayProductos = [];
+let formulario = document.querySelector("#formulario");
+let inputNombre = document.querySelector("#iNombre");
+
+let nombreI = formulario[0].value;
+let precioI = formulario[1].value;
+let stockI = formulario[2].value;
+
+let ingreso = document.querySelector("#productoIngresado");
+let displayTodos = document.querySelector("#displayTodos");
+let parrafos = displayTodos.getElementsByTagName("p");
+let bandera = false;
+
+// Defino los eventos 
+
+formulario.addEventListener("submit", agregarProducto);
+btnMostrar.addEventListener("click", mostrarProductos);
+
+// Pongo en focus el input
+
+inputNombre.focus();
+
+// Funciones
+
+// Funcion para comprobar el ingreso de datos
+
+function validarDatos() {
+    nombreI = formulario[0].value;
+    precioI = formulario[1].value;
+    stockI = formulario[2].value;
+    console.log(nombreI);
+    console.log(precioI);
+    console.log(stockI);
+
+    if (nombreI == "" || precioI == "" || stockI == "") {
+        alert("Error, debe completar todos los campos para continuar");
+        inputNombre.focus();
+        bandera = false;
+    } else {
+        bandera = true;
     }
-    while(true) {
-        var cantidadP = parseFloat(prompt("Ingresar la cantidad de stock del producto"));
-        if (cantidadP < 0) {
-            alert("La cantidad ingresada debe ser un numero mayor o igual a 0");
-        } else if(!isNaN(cantidadP)){
-            break;
+    
+}
+
+/* if (precioI <= 0) {
+    alert("El precio ingresado debe ser un numero mayor a 0");
+} else if(isNaN(precioI)){
+    alert("El registro ingresado no es un numero");
+}
+
+if (stockI < 0) {
+    alert("La cantidad ingresada debe ser un numero mayor o igual a 0");
+} else if(isNaN(stockI)){
+    alert("El registro ingresado no es un numero");
+}
+*/
+
+// Funcion para agregar productos
+
+function agregarProducto(e) {
+    e.preventDefault();
+    validarDatos();
+    if (bandera == true) {
+        let opcion = confirm("Esta seguro de agregar el producto?");
+        if (opcion == true) {
+            let formulario = e.target
+            arrayProductos.push(new Producto(nombreI, precioI, stockI));
         } else {
-            alert("El registro ingresado no es un numero");
-            continue;
+            alert("No se agregara el producto");
         }
-    }
-    arrayProductos.push(new Producto(nombreP, precioP, cantidadP));
+        formulario[1].value = "";
+        formulario[2].value = "";
+        formulario[3].value = "";
+        ingreso.innerHTML = "";
+        agregarAlDom();
+        inputNombre.focus();
+    } else {
+        inputNombre.focus();
     }
 }
 
-// Se marca el fin del ingreso de datos.
+// Funcion para mostrar en el DOM el ultimo producto agregado
 
-while (comprobacion != "fin" || comprobacion != "FIN" || comprobacion != "Fin")
+function agregarAlDom() {
+    ingreso.innerHTML = `<h3> Ultimo producto agregado: </h3>
+                            <p> Nombre: ${nombreI}</p>
+                            <p> Cantidad: ${stockI}</p>
+                            <p> Precio: ${precioI}</p>`;
+}
 
-console.log(arrayProductos);
+// Funcion para mostrar todos los productos
 
-
-// Se imprimen los datos ingresados y procesados.
-
-for (let producto of arrayProductos) {
-    let contenedor = document.createElement("div");
-    contenedor.innerHTML = `<h4> El producto ingresado es: ${producto.nombre}</h4>
-                            <p> La cantidad en stock del producto ingresado es: ${producto.cantidad}</p>
-                            <p> El precio del producto es: ${producto.precio}</p>`;
-    document.body.appendChild(contenedor);
+function mostrarProductos(e) {
+    e.preventDefault();
+    let i = 0;
+    displayTodos.innerHTML = `<h3> Listado de todos los productos: </h3>`;
+    for (const producto of arrayProductos) {
+        displayTodos.innerHTML += `<p> Nombre: ${nombreI}</p>
+                                    <p> Cantidad: ${stockI}</p>
+                                    <p> Precio: ${precioI}</p>`;
+    }
 }
 
 // Unidades con poco stock - menos de 5 unidades

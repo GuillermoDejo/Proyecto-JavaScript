@@ -8,14 +8,38 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <h1>Primera Entrega del Proyecto Final de JavaScript</h1>
-    <h2>Sistema de registro de productos</h2>
+    <h1>5° Entrega del Proyecto de JavaScript</h1>
+    <h2>Interactuar con el DOM mediante eventos</h2>
     <div class="buttons">
         <input id="pocoStock" type="button" value="Poco Stock" onclick="bajoStock();"/>
         <input id="sinStock" type="button" value="Sin Stock" onclick="noStock();"/>
         <input id="buscador" type="button" value="Buscador por nombre" onclick="buscador();"/>
         <input id="ordenCant" type="button" value="Ordenados por cantidad" onclick="ordenCant();"/>
         <input id="ordenPre" type="button" value="Ordenados por precio" onclick="ordenPre();"/>
+    </div>
+    <h3> Ingrese los datos del producto a agregar:</h3>
+    <div class="ingreso">
+        <form id="formulario">
+            <label> Nombre del producto: </label>
+            <input class="iText" type="text" name="nombre" id="iNombre">
+
+            <label> Precio del producto: </label>
+            <input class="iNumber" type="number" name="precio" id="iPrecio">
+
+            <label> Stock del producto: </label>
+            <input class="iNumber" type="number" name="cantidad" id="iStock">
+
+            <div id="buttonsForm">
+                <input type="submit" id="btnSubmit" value="Confirmar">
+                <input type="button" id="btnMostrar" value="Mostrar">
+            </div>
+        </form>
+    </div>
+    <div id="productoIngresado">
+
+    </div>
+    <div id="displayTodos">
+
     </div>
     <script type="text/javascript" src="script.js"></script>
 </body>
