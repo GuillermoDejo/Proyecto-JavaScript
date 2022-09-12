@@ -15,26 +15,11 @@ class Producto {
 
 let arrayProductos = [];
 let formulario = document.querySelector("#formulario");
-let venta = document.querySelector("#venta");
-let reabastecimiento = document.querySelector("#reabastecimiento");
-let nuevoPrecio = document.querySelector("#nuevoPrecio");
-let eliminarProd = document.querySelector("#eliminarProd");
 let inputNombre = document.querySelector("#iNombre");
 
 let nombreI = formulario[0].value;
 let precioI = formulario[1].value;
 let stockI = formulario[2].value;
-
-let nombreB = venta[0].value;
-let stockB = venta[1].value;
-
-let nombreC = reabastecimiento[0].value;
-let stockC = reabastecimiento[1].value;
-
-let nombreD = nuevoPrecio[0].value;
-let precioD = nuevoPrecio[1].value;
-
-let nombreE = eliminarProd[0].value;
 
 let ingreso = document.querySelector("#productoIngresado");
 let displayTodos = document.querySelector("#displayTodos");
@@ -49,14 +34,15 @@ let displayPrecio = document.querySelector("#precioNuevo");
 let parrafos = displayTodos.getElementsByTagName("p");
 let bandera = false;
 
+
 // Defino los eventos 
 
 formulario.addEventListener("submit", agregarProducto);
 btnMostrar.addEventListener("click", mostrarProductos);
 btnVenta.addEventListener("click", restarStock);
-btnReabast.addEventListener("submit", sumarStock);
-btnPrecioNuevo.addEventListener("submit", nuevoPrecio);
-btnEliminarProd.addEventListener("submit", eliminarProd);
+btnReabast.addEventListener("click", sumarStock);
+btnPrecioNuevo.addEventListener("click", nuevoPrecio);
+btnEliminarProd.addEventListener("click", eliminarProd);
 
 
 // Pongo en focus el input
@@ -123,10 +109,19 @@ function agregarProducto(e) {
 // Funcion para mostrar en el DOM el ultimo producto agregado
 
 function agregarAlDom() {
+    displayTodos.innerHTML=``;
+    displayPocoStock.innerHTML = ``;
+    displaySinStock.innerHTML = ``;
+    displayBuscador.innerHTML = ``;
+    displayOrdenCant.innerHTML = ``;
+    displayOrdenPre.innerHTML = ``;
+    displayVenta.innerHTML = ``;
+    displayReabast.innerHTML = ``;
+    displayPrecio.innerHTML = ``;
     ingreso.innerHTML = `<h3> Ultimo producto agregado: </h3>
-                            <p> Nombre: ${nombreI}</p>
+                            <ul><li><p> Nombre: ${nombreI}</p>
                             <p> Cantidad: ${stockI}</p>
-                            <p> Precio: ${precioI}</p>`;
+                            <p> Precio: ${precioI}</p></li></ul>`;
 }
 
 // Funcion para mostrar todos los productos
@@ -134,42 +129,78 @@ function agregarAlDom() {
 function mostrarProductos(e) {
     e.preventDefault();
     let i = 0;
+    ingreso.innerHTML=``;
+    displayPocoStock.innerHTML = ``;
+    displaySinStock.innerHTML = ``;
+    displayBuscador.innerHTML = ``;
+    displayOrdenCant.innerHTML = ``;
+    displayOrdenPre.innerHTML = ``;
+    displayVenta.innerHTML = ``;
+    displayReabast.innerHTML = ``;
+    displayPrecio.innerHTML = ``;
     displayTodos.innerHTML = `<h3> Listado de todos los productos: </h3>`;
     for (const producto of arrayProductos) {
-        displayTodos.innerHTML += `<p> Nombre: ${producto.nombre}</p>
+        displayTodos.innerHTML += `<ul><li><p> Nombre: ${producto.nombre}</p>
                                     <p> Cantidad: ${producto.cantidad}</p>
-                                    <p> Precio: ${producto.precio}</p>`;
+                                    <p> Precio: ${producto.precio}</p></li></ul>`;
     }
 }
 
 // Funcion de venta
 
-function restarStock(e){
-    e.preventDefault();
-    var indexRS = arrayProductos.indexOf(nombreB);
-    console.log(nombreB)
-    console.log(venta)
-    console.log(indexRS);
-    arrayProductos[indexRS] - stockB
+function restarStock(){
+    var nombreRS = prompt("Ingresar el producto vendido: ");
+    var cantRS = parseFloat(prompt("Ingresar la cantidad vendida: "));
+    for (const producto of arrayProductos){
+        if (nombreRS !== producto.nombre){
+        } else {
+            cantViejaRS = producto.cantidad;
+            cantNuevaRS = cantViejaRS - cantRS;
+            producto.cantidad = cantNuevaRS;
+        }
+    }
 }
 
 // Funcion de reabastecimiento
 
 function sumarStock(){
-
+    var nombreSS = prompt("Ingresar el producto reabastecido: ");
+    var cantSS = parseFloat(prompt("Ingresar la cantidad ingresada: "));
+    for (const producto of arrayProductos){
+        if (nombreSS !== producto.nombre){
+        } else {
+            cantViejaSS = producto.cantidad;
+            cantNuevaSS = cantViejaSS + cantSS;
+            producto.cantidad = cantNuevaSS;
+        }
+    }
 }
 
 // Funcion de precio nuevo
 
-function newPrecio(){
-
-
+function nuevoPrecio(){
+    var nombreNP = prompt("Ingresar el producto a actualizar: ");
+    var precioNP = parseFloat(prompt("Ingresar el nuevo precio: "));
+    for (const producto of arrayProductos){
+        if (nombreNP !== producto.nombre){
+        } else {
+            producto.precio = precioNP;
+        }
+    }
 }
 
 // Funcion de eliminar un producto 
 
-function eliminProd(){
-
+function eliminarProd(){
+    var nombreEP = prompt("Ingresar el producto a eliminar: ");
+    var indexEP = 0;
+    for (const producto of arrayProductos){
+        if (nombreEP !== producto.nombre){
+            indexEP += 1;
+        } else {
+            arrayProductos.splice(indexEP,1);
+        }
+    }
 }
 
 // Unidades con poco stock - menos de 5 unidades
@@ -177,11 +208,20 @@ function eliminProd(){
 function bajoStock () {
     var bajoStock = arrayProductos.filter(producto => producto.cantidad <=5 );
     console.log(bajoStock);
-    displayTodos.innerHTML = `<h3> Lista de productos con poco stock (menos de 5 unidades): </h3>`;
+    ingreso.innerHTML=``;
+    displayTodos.innerHTML = ``;
+    displaySinStock.innerHTML = ``;
+    displayBuscador.innerHTML = ``;
+    displayOrdenCant.innerHTML = ``;
+    displayOrdenPre.innerHTML = ``;
+    displayVenta.innerHTML = ``;
+    displayReabast.innerHTML = ``;
+    displayPrecio.innerHTML = ``;
+    displayPocoStock.innerHTML = `<h3> Lista de productos con poco stock (menos de 5 unidades): </h3>`;
 
     for (const producto of bajoStock) {
-        displayPocoStock.innerHTML += `<p> Nombre: ${producto.nombre}</p>
-                                    <p> Cantidad: ${producto.cantidad}</p>`;
+        displayPocoStock.innerHTML += `<ul><li><p> Nombre: ${producto.nombre}</p>
+                                    <p> Cantidad: ${producto.cantidad}</p></li></ul>`;
     }
 }
 
@@ -190,11 +230,20 @@ function bajoStock () {
 function noStock() {
     var sinStock = arrayProductos.filter(producto => producto.cantidad == 0 || producto.disponible == false);
     console.log(sinStock);
-    displayTodos.innerHTML = `<h3> Lista de productos sin Stock: </h3>`;
+    ingreso.innerHTML=``;
+    displayPocoStock.innerHTML = ``;
+    displayTodos.innerHTML = ``;
+    displayBuscador.innerHTML = ``;
+    displayOrdenCant.innerHTML = ``;
+    displayOrdenPre.innerHTML = ``;
+    displayVenta.innerHTML = ``;
+    displayReabast.innerHTML = ``;
+    displayPrecio.innerHTML = ``;
+    displaySinStock.innerHTML = `<h3> Lista de productos sin Stock: </h3>`;
 
     for (const producto of sinStock) {
-        displaySinStock.innerHTML += `<p> Nombre: ${producto.nombre}</p>
-                                    <p> Cantidad: ${producto.cantidad}</p>`;
+        displaySinStock.innerHTML += `<ul><li><p> Nombre: ${producto.nombre}</p>
+                                    <p> Cantidad: ${producto.cantidad}</p></li></ul>`;
     }
 }
 
@@ -204,12 +253,21 @@ function buscador() {
     var nombreIngresado = prompt("Ingresar el producto que desea buscar");
     var prodIngresado = arrayProductos.filter(producto => producto.nombre.includes(nombreIngresado));
     console.log(prodIngresado);
-    displayTodos.innerHTML = `<h3> Lista de productos ingresados para busqueda: </h3>`;
+    ingreso.innerHTML=``;
+    displayPocoStock.innerHTML = ``;
+    displaySinStock.innerHTML = ``;
+    displayTodos.innerHTML = ``;
+    displayOrdenCant.innerHTML = ``;
+    displayOrdenPre.innerHTML = ``;
+    displayVenta.innerHTML = ``;
+    displayReabast.innerHTML = ``;
+    displayPrecio.innerHTML = ``;
+    displayBuscador.innerHTML = `<h3> Lista de productos ingresados para busqueda: </h3>`;
 
     for (const producto of prodIngresado) {
-        displayBuscador.innerHTML += `<p> Nombre: ${producto.nombre}</p>
+        displayBuscador.innerHTML += `<ul><li><p> Nombre: ${producto.nombre}</p>
                                     <p> Cantidad: ${producto.cantidad}</p>
-                                    <p> Precio: ${producto.precio}</p>`;
+                                    <p> Precio: ${producto.precio}</p></li></ul>`;
     }
 }
 
@@ -223,11 +281,20 @@ function ordenCant(){
     });
     console.log("Productos ordenados por cantidad ascendente: ");
     console.log(ordenCantidad);
-    displayTodos.innerHTML = `<h3> Lista de productos ordenados por cantidad ascendente: </h3>`;
+    ingreso.innerHTML=``;
+    displayPocoStock.innerHTML = ``;
+    displaySinStock.innerHTML = ``;
+    displayBuscador.innerHTML = ``;
+    displayTodos.innerHTML = ``;
+    displayOrdenPre.innerHTML = ``;
+    displayVenta.innerHTML = ``;
+    displayReabast.innerHTML = ``;
+    displayPrecio.innerHTML = ``;
+    displayOrdenCant.innerHTML = `<h3> Lista de productos ordenados por cantidad ascendente: </h3>`;
 
     for (const producto of ordenCantidad) {
-        displayOrdenCant.innerHTML += `<p> Nombre: ${producto.nombre}</p>
-                                    <p> Cantidad: ${producto.cantidad}</p>`;
+        displayOrdenCant.innerHTML += `<ul><li><p> Nombre: ${producto.nombre}</p>
+                                    <p> Cantidad: ${producto.cantidad}</p></li></ul>`;
     }
 }
 
@@ -243,10 +310,19 @@ function ordenPre() {
 
     console.log("Productos ordenados por precio ascendente: ");
     console.log(ordenPrecio);
-    displayTodos.innerHTML = `<h3> Lista de productos ordenados por precio ascendente: </h3>`;
+    ingreso.innerHTML=``;
+    displayPocoStock.innerHTML = ``;
+    displaySinStock.innerHTML = ``;
+    displayBuscador.innerHTML = ``;
+    displayOrdenCant.innerHTML = ``;
+    displayTodos.innerHTML = ``;
+    displayVenta.innerHTML = ``;
+    displayReabast.innerHTML = ``;
+    displayPrecio.innerHTML = ``;
+    displayOrdenPre.innerHTML = `<h3> Lista de productos ordenados por precio ascendente: </h3>`;
 
     for (const producto of ordenPrecio) {
-        displayOrdenPre.innerHTML += `<p> Nombre: ${producto.nombre}</p>
-                                      <p> Precio: ${producto.precio}</p>`;
+        displayOrdenPre.innerHTML += `<ul><li><p> Nombre: ${producto.nombre}</p>
+                                      <p> Precio: ${producto.precio}</p></li></ul>`;
     }
 }
