@@ -1,11 +1,15 @@
 /* Estilos */
 
+/* GENERALES */
+
 * {
     font-family: 'Times New Roman', Times, serif;
     background-color: black;
     color: grey;
     padding: 0rem 1rem;
 }
+
+/* TITULOS */
 
 h1,h2 {
     text-align: center;
@@ -15,12 +19,11 @@ h2 {
     padding-bottom: 3rem;
 }
 
-.buttons {
-    display: flex;
-    align-content: center;
-    justify-content: space-between;
-    padding: 2em 5em;
+h3 {
+    padding: 3rem 0rem 1rem 0rem;
 }
+
+/* DIVS */
 
 .ingreso {
     display: flex;
@@ -29,7 +32,7 @@ h2 {
 }
 
 #formulario {
-    height: 750px;
+    height: 300px;
     width: 400px;
     padding: 20px;
     gap: 20px;
@@ -37,7 +40,77 @@ h2 {
     flex-direction: column;
 }
 
+/* BOTONES */
+
+.buttons {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    padding: 2em 5em;
+}
+
 #buttonsForm {
     text-align: center;
     word-spacing: 10px;
 }
+
+.iText {
+    background-color: grey;
+    color: black;
+    display: inline-block;
+    outline: none;
+    border-radius: 5px;
+    border: none;
+}
+
+.iNumber {
+    background-color: grey;
+    color: black;
+    display: inline-block;
+    outline: none;
+    border-radius: 5px;
+    border: none;
+}
+
+.utilidades {
+    padding-bottom: 3rem;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.utilidades form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.boton {
+    min-width: 115px;
+    height: 30px;
+    color: black;
+    padding: 5px 10px;
+    font-weight: lighter;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 5px;
+    border: none;
+    background: darkgrey;
+    box-shadow: 0 5px grey;
+}
+
+.boton:hover {
+    box-shadow: 0 3px grey;
+    top: 1px;
+}
+
+.boton:active {
+    box-shadow: 0 0 grey;
+    top: 5px;
+  }
+

@@ -8,14 +8,15 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <h1>5° Entrega del Proyecto de JavaScript</h1>
-    <h2>Interactuar con el DOM mediante eventos</h2>
+    <h1>Segunda Entrega del Proyecto Final de CoderHouse</h1>
+    <h2>JavaScript</h2>
+    <h3>Filtros de busqueda:</h3>
     <div class="buttons">
-        <input id="pocoStock" type="button" value="Poco Stock" onclick="bajoStock();"/>
-        <input id="sinStock" type="button" value="Sin Stock" onclick="noStock();"/>
-        <input id="buscador" type="button" value="Buscador por nombre" onclick="buscador();"/>
-        <input id="ordenCant" type="button" value="Ordenados por cantidad" onclick="ordenCant();"/>
-        <input id="ordenPre" type="button" value="Ordenados por precio" onclick="ordenPre();"/>
+        <input id="pocoStock" class="boton" type="button" value="Poco Stock" onclick="bajoStock();"/>
+        <input id="sinStock" class="boton" type="button" value="Sin Stock" onclick="noStock();"/>
+        <input id="buscador" class="boton" type="button" value="Buscador por nombre" onclick="buscador();"/>
+        <input id="ordenCant" class="boton" type="button" value="Ordenados por cantidad" onclick="ordenCant();"/>
+        <input id="ordenPre" class="boton" type="button" value="Ordenados por precio" onclick="ordenPre();"/>
     </div>
     <h3> Ingrese los datos del producto a agregar:</h3>
     <div class="ingreso">
@@ -30,15 +31,72 @@
             <input class="iNumber" type="number" name="cantidad" id="iStock">
 
             <div id="buttonsForm">
-                <input type="submit" id="btnSubmit" value="Confirmar">
-                <input type="button" id="btnMostrar" value="Mostrar">
+                <input type="submit" id="btnSubmit" class="boton" value="Confirmar">
+                <input type="button" id="btnMostrar" class="boton" value="Mostrar">
             </div>
+        </form>
+    </div>
+    <h3>Utilidades:</h3>
+    <div id="buttonsForm" class="utilidades">
+        <form id="venta">
+            <label> Nombre del producto: </label>
+            <input class="iText" type="text" name="nombre" id="bNombre">
+            <label> Stock del producto: </label>
+            <input class="iNumber" type="number" name="cantidad" id="bStock">
+            <input type="button" id="btnVenta" class="boton" value="Venta">
+        </form>
+        <form id="reabastecimiento">
+            <label> Nombre del producto: </label>
+            <input class="iText" type="text" name="nombre" id="cNombre">
+            <label> Stock del producto: </label>
+            <input class="iNumber" type="number" name="cantidad" id="cStock">
+            <input type="submit" id="btnReabast" class="boton" value="Reabastecimiento">
+
+        </form>
+        <form id="nuevoPrecio">
+            <label> Nombre del producto: </label>
+            <input class="iText" type="text" name="nombre" id="dNombre">
+            <label> Stock del producto: </label>
+            <input class="iNumber" type="number" name="precio" id="dPrecio">
+            <input type="submit" id="btnPrecioNuevo" class="boton" value="Actualizar Precio">
+        </form>
+        <form id="eliminarProd">
+            <label> Nombre del producto: </label>
+            <input class="iText" type="text" name="nombre" id="eNombre">
+            <input type="submit" id="btnEliminarProd" class="boton" value="Eliminar producto">
         </form>
     </div>
     <div id="productoIngresado">
 
     </div>
     <div id="displayTodos">
+
+    </div>
+    <div id="displayPocoStock">
+
+    </div>
+    <div id="displaySinStock">
+
+    </div>
+    <div id="displayBuscador">
+
+    </div>
+    <div id="displayOrdenCant">
+
+    </div>
+    <div id="displayOrdenPre">
+
+    </div>
+    <div id="displayVenta">
+
+    </div>
+    <div id="displayReabast">
+
+    </div>
+    <div id="precioNuevo">
+        
+    </div>
+    <div id="eliminarProd">
 
     </div>
     <script type="text/javascript" src="script.js"></script>
