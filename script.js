@@ -187,12 +187,30 @@ function mostrarProductos(e) {
 function restarStock(){
     var nombreRS = prompt("Ingresar el producto vendido: ");
     var cantRS = parseFloat(prompt("Ingresar la cantidad vendida: "));
-    for (const producto of arrayProductos){
-        if (nombreRS !== producto.nombre){
-        } else {
-            cantViejaRS = producto.cantidad;
-            cantNuevaRS = cantViejaRS - cantRS;
-            producto.cantidad = cantNuevaRS;
+    if (nombreRS == "" || cantRS == "" || cantRS == 0){
+        Swal.fire({
+            title: 'Error!',
+            text: 'El nombre o la cantidad son erroneas',
+            icon: 'error',
+            confirmButtonText: ' Intentar de nuevo '
+        })
+    } else {
+        for (const producto of arrayProductos){
+            if (nombreRS !== producto.nombre){
+            } else {
+                cantViejaRS = producto.cantidad;
+                if (cantRS > producto.cantidad) {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'La cantidad de venta supera el stock actual',
+                        icon: 'error',
+                        confirmButtonText: ' Intentar de nuevo '
+                    })
+                } else {
+                    cantNuevaRS = cantViejaRS - cantRS;
+                    producto.cantidad = cantNuevaRS;
+                }
+            }
         }
     }
 }
@@ -202,12 +220,21 @@ function restarStock(){
 function sumarStock(){
     var nombreSS = prompt("Ingresar el producto reabastecido: ");
     var cantSS = parseFloat(prompt("Ingresar la cantidad ingresada: "));
-    for (const producto of arrayProductos){
-        if (nombreSS !== producto.nombre){
-        } else {
-            cantViejaSS = producto.cantidad;
-            cantNuevaSS = cantViejaSS + cantSS;
-            producto.cantidad = cantNuevaSS;
+    if (nombreRS == "" || cantSS == "" || cantSS == 0){
+        Swal.fire({
+            title: 'Error!',
+            text: 'El nombre o la cantidad son erroneas',
+            icon: 'error',
+            confirmButtonText: ' Intentar de nuevo '
+        })
+    } else {
+        for (const producto of arrayProductos){
+            if (nombreSS !== producto.nombre){
+            } else {
+                cantViejaSS = producto.cantidad;
+                cantNuevaSS = cantViejaSS + cantSS;
+                producto.cantidad = cantNuevaSS;
+            }
         }
     }
 }
@@ -217,10 +244,19 @@ function sumarStock(){
 function nuevoPrecio(){
     var nombreNP = prompt("Ingresar el producto a actualizar: ");
     var precioNP = parseFloat(prompt("Ingresar el nuevo precio: "));
-    for (const producto of arrayProductos){
-        if (nombreNP !== producto.nombre){
-        } else {
-            producto.precio = precioNP;
+    if (nombreRS == "" || precioNP == "" || precioNP == 0){
+        Swal.fire({
+            title: 'Error!',
+            text: 'El nombre o el precio son erroneos',
+            icon: 'error',
+            confirmButtonText: ' Intentar de nuevo '
+        })
+    } else {
+        for (const producto of arrayProductos){
+            if (nombreNP !== producto.nombre){
+            } else {
+                producto.precio = precioNP;
+            }
         }
     }
 }
@@ -230,11 +266,20 @@ function nuevoPrecio(){
 function eliminarProd(){
     var nombreEP = prompt("Ingresar el producto a eliminar: ");
     var indexEP = 0;
-    for (const producto of arrayProductos){
-        if (nombreEP !== producto.nombre){
-            indexEP ++;
-        } else {
-            arrayProductos.splice(indexEP,1);
+    if (nombreRS == ""){
+        Swal.fire({
+            title: 'Error!',
+            text: 'El nombre es erroneo',
+            icon: 'error',
+            confirmButtonText: ' Intentar de nuevo '
+        })
+    } else {
+        for (const producto of arrayProductos){
+            if (nombreEP !== producto.nombre){
+                indexEP ++;
+            } else {
+                arrayProductos.splice(indexEP,1);
+            }
         }
     }
 }
