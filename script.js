@@ -187,7 +187,7 @@ function mostrarProductos(e) {
 function restarStock(){
     var nombreRS = prompt("Ingresar el producto vendido: ");
     var cantRS = parseFloat(prompt("Ingresar la cantidad vendida: "));
-    if (nombreRS == "" || cantRS == "" || cantRS == 0){
+    if (nombreRS == "" || cantRS == "" || cantRS == 0 || isNaN(cantRS)){
         Swal.fire({
             title: 'Error!',
             text: 'El nombre o la cantidad son erroneas',
@@ -220,7 +220,7 @@ function restarStock(){
 function sumarStock(){
     var nombreSS = prompt("Ingresar el producto reabastecido: ");
     var cantSS = parseFloat(prompt("Ingresar la cantidad ingresada: "));
-    if (nombreRS == "" || cantSS == "" || cantSS == 0){
+    if (nombreSS == "" || cantSS == "" || cantSS == 0 || isNaN(cantSS)){
         Swal.fire({
             title: 'Error!',
             text: 'El nombre o la cantidad son erroneas',
@@ -244,7 +244,7 @@ function sumarStock(){
 function nuevoPrecio(){
     var nombreNP = prompt("Ingresar el producto a actualizar: ");
     var precioNP = parseFloat(prompt("Ingresar el nuevo precio: "));
-    if (nombreRS == "" || precioNP == "" || precioNP == 0){
+    if (nombreNP == "" || precioNP == "" || precioNP == 0 || isNaN(precioNP)){
         Swal.fire({
             title: 'Error!',
             text: 'El nombre o el precio son erroneos',
@@ -266,7 +266,7 @@ function nuevoPrecio(){
 function eliminarProd(){
     var nombreEP = prompt("Ingresar el producto a eliminar: ");
     var indexEP = 0;
-    if (nombreRS == ""){
+    if (nombreEP == ""){
         Swal.fire({
             title: 'Error!',
             text: 'El nombre es erroneo',
