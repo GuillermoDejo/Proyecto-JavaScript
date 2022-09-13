@@ -2,8 +2,7 @@
 
 /* GENERALES */
 
-* {
-    font-family: 'Times New Roman', Times, serif;
+body {
     background-color: black;
     color: grey;
     padding: 0rem 1rem;

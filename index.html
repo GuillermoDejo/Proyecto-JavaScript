@@ -5,11 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Primera Entrega del Proyecto Final</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <h1>Segunda Entrega del Proyecto Final de CoderHouse</h1>
-    <h2>JavaScript</h2>
+    <h1>Base de Datos</h1>
+    <h2>Inventario</h2>
     <h3>Filtros de busqueda:</h3>
     <div class="buttons">
         <input id="pocoStock" class="boton" type="button" value="Poco Stock" onclick="bajoStock();"/>
@@ -39,9 +40,9 @@
     <h3>Utilidades:</h3>
     <div id="buttonsForm" class="utilidades">
         <input type="button" id="btnVenta" class="boton" value="Venta">
-        <input type="submit" id="btnReabast" class="boton" value="Reabastecimiento">
-        <input type="submit" id="btnPrecioNuevo" class="boton" value="Actualizar Precio">
-        <input type="submit" id="btnEliminarProd" class="boton" value="Eliminar producto">
+        <input type="button" id="btnReabast" class="boton" value="Reabastecimiento">
+        <input type="button" id="btnPrecioNuevo" class="boton" value="Actualizar Precio">
+        <input type="button" id="btnEliminarProd" class="boton" value="Eliminar producto">
     </div>
     <div id="productoIngresado">
 
@@ -76,6 +77,9 @@
     <div id="eliminarProd">
 
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript" src="script.js"></script>
 </body>
 </html>

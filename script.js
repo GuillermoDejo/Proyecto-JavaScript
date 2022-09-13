@@ -17,9 +17,7 @@ let arrayProductos = [];
 let formulario = document.querySelector("#formulario");
 let inputNombre = document.querySelector("#iNombre");
 
-let nombreI = formulario[0].value;
-let precioI = formulario[1].value;
-let stockI = formulario[2].value;
+let {nombreI, precioI, stockI} = formulario;
 
 let ingreso = document.querySelector("#productoIngresado");
 let displayTodos = document.querySelector("#displayTodos");
@@ -62,19 +60,44 @@ function validarDatos() {
     console.log(stockI);
 
     if (nombreI == "" || precioI == "" || stockI == "") {
-        alert("Error, debe completar todos los campos para continuar");
+        Swal.fire({
+            title: 'Error!',
+            text: 'Debe completar todos los campos para continuar',
+            icon: 'error',
+            confirmButtonText: ' Intentar de nuevo '
+        })
         inputNombre.focus();
         bandera = false;
     } else if (precioI <= 0){
-        alert("El precio ingresado debe ser un numero mayor a 0");
+        Swal.fire({
+            title: 'Error!',
+            text: 'El precio debe ser mayor a 0',
+            icon: 'error',
+            confirmButtonText: ' Intentar de nuevo '
+        })
     } else if (isNaN(precioI)){
-        alert("El registro ingresado no es un numero");
+        Swal.fire({
+            title: 'Error!',
+            text: 'El registro no es un numero',
+            icon: 'error',
+            confirmButtonText: ' Intentar de nuevo '
+        })
     }
 
     if (stockI < 0) {
-        alert("La cantidad ingresada debe ser un numero mayor o igual a 0");
+        Swal.fire({
+            title: 'Error!',
+            text: 'La cantidad debe ser mayor a 0',
+            icon: 'error',
+            confirmButtonText: ' Intentar de nuevo '
+        })
     } else if(isNaN(stockI)){
-        alert("El registro ingresado no es un numero");
+        Swal.fire({
+            title: 'Error!',
+            text: 'El registro no es un numero',
+            icon: 'error',
+            confirmButtonText: ' Intentar de nuevo '
+        })
     }
     else if (nombreI !== "" && precioI !== "" && stockI !== "" && precioI > 0 && stockI > 0){
         bandera = true;
@@ -88,13 +111,26 @@ function agregarProducto(e) {
     e.preventDefault();
     validarDatos();
     if (bandera == true) {
-        let opcion = confirm("Esta seguro de agregar el producto?");
-        if (opcion == true) {
-            let formulario = e.target;
-            arrayProductos.push(new Producto(nombreI, precioI, stockI));
-        } else {
-            alert("No se agregara el producto");
-        }
+        formulario.addEventListener('submit', (agregarProducto) => {
+            Swal.fire({
+                title: 'Está seguro de agregar el producto?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, seguro',
+                cancelButtonText: 'No, no quiero'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Agregado!',
+                        icon: 'success',
+                        text: 'El archivo ha sido agregado'
+                    })
+                    let formulario = e.target;
+                    arrayProductos.push(new Producto(nombreI, precioI, stockI));
+                }
+            })
+        })
+        
         formulario[1].value = "";
         formulario[2].value = "";
         formulario[3].value = "";
@@ -196,7 +232,7 @@ function eliminarProd(){
     var indexEP = 0;
     for (const producto of arrayProductos){
         if (nombreEP !== producto.nombre){
-            indexEP += 1;
+            indexEP ++;
         } else {
             arrayProductos.splice(indexEP,1);
         }
