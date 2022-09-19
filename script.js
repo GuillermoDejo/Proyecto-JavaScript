@@ -14,6 +14,22 @@ class Producto {
 // Defino las variables
 
 let arrayProductos = [];
+let productosEnLS = [];
+
+const guardarLocal = (clave, valor) => {localStorage.setItem(clave,valor)};
+ 
+// Si habia algo almacenado, lo recupero.
+if (productosEnLS) {
+    arrayProductos = productosEnLS;
+}
+
+// Almacenar el arrar completo
+
+guardarLocal("listaProductos",JSON.stringify(arrayProductos));
+
+productosEnLS = JSON.stringify(localStorage.getItem('listaProductos'))
+
+
 let formulario = document.querySelector("#formulario");
 let inputNombre = document.querySelector("#iNombre");
 
