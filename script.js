@@ -127,34 +127,32 @@ function agregarProducto(e) {
     e.preventDefault();
     validarDatos();
     if (bandera == true) {
-        formulario.addEventListener('submit', (agregarProducto) => {
-            Swal.fire({
-                title: 'Está seguro de agregar el producto?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Sí, seguro',
-                cancelButtonText: 'No, no quiero'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire({
-                        title: 'Agregado!',
-                        icon: 'success',
-                        text: 'El archivo ha sido agregado'
-                    })
-                    let formulario = e.target;
-                    arrayProductos.push(new Producto(nombreI, precioI, stockI));
-                }
-            })
+        Swal.fire({
+            title: 'Está seguro de agregar el producto?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, seguro',
+            cancelButtonText: 'No, no quiero'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Agregado!',
+                    icon: 'success',
+                    text: 'El archivo ha sido agregado'
+                })
+                arrayProductos.push(new Producto(nombreI, precioI, stockI));
+            } else {
+
+            }
         })
         
         formulario[1].value = "";
         formulario[2].value = "";
         formulario[3].value = "";
         ingreso.innerHTML = "";
-        agregarAlDom();
-        inputNombre.focus();
+    agregarAlDom();
     } else {
-        inputNombre.focus();
+        
     }
 }
 
