@@ -58,11 +58,6 @@ btnReabast.addEventListener("click", sumarStock);
 btnPrecioNuevo.addEventListener("click", nuevoPrecio);
 btnEliminarProd.addEventListener("click", eliminarProd);
 
-
-// Pongo en focus el input
-
-inputNombre.focus();
-
 // Funciones
 
 // Funcion para comprobar el ingreso de datos
@@ -82,7 +77,6 @@ function validarDatos() {
             icon: 'error',
             confirmButtonText: ' Intentar de nuevo '
         })
-        inputNombre.focus();
         bandera = false;
     } else if (precioI <= 0){
         Swal.fire({
@@ -127,30 +121,28 @@ function agregarProducto(e) {
     e.preventDefault();
     validarDatos();
     if (bandera == true) {
-        Swal.fire({
-            title: 'Está seguro de agregar el producto?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Sí, seguro',
-            cancelButtonText: 'No, no quiero'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: 'Agregado!',
-                    icon: 'success',
-                    text: 'El archivo ha sido agregado'
-                })
-                arrayProductos.push(new Producto(nombreI, precioI, stockI));
-            } else {
+            Swal.fire({
+                title: 'Está seguro de agregar el producto?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, seguro',
+                cancelButtonText: 'No, no quiero'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Agregado!',
+                        icon: 'success',
+                        text: 'El archivo ha sido agregado'
+                    })
+                    arrayProductos.push(new Producto(nombreI, precioI, stockI));
+                } else {
 
-            }
-        })
-        
-        formulario[1].value = "";
-        formulario[2].value = "";
-        formulario[3].value = "";
-        ingreso.innerHTML = "";
-    agregarAlDom();
+                }
+            })
+           formulario[0].value = "";
+           formulario[1].value = "";
+           formulario[2].value = "";
+        agregarAlDom();
     } else {
         
     }
