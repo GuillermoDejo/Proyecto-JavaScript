@@ -180,7 +180,8 @@ function mostrarProductos(e) {
     displayVenta.innerHTML = ``;
     displayReabast.innerHTML = ``;
     displayPrecio.innerHTML = ``;
-    displayTodos.innerHTML = `<h3> Listado de todos los productos: </h3>`;
+    displayTodos.innerHTML = `<h3> Listado de todos los productos: </h3>
+                              <h4> CADA VEZ QUE ACTUALICE UN PRODUCTO DEBERA PRESIONAR EL BOTON MOSTRAR PARA REFLEJAR EL CAMBIO </h4>`;
     for (const producto of arrayProductos) {
         displayTodos.innerHTML += `<ul><li><p> Nombre: ${producto.nombre}</p>
                                     <p> Cantidad: ${producto.cantidad}</p>
