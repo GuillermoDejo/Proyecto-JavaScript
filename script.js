@@ -13,21 +13,20 @@ class Producto {
 
 // Defino las variables
 
-let arrayProductos = [];
-let productosEnLS = [];
-
-const guardarLocal = (clave, valor) => {localStorage.setItem(clave,valor)};
+var arrayProductos = [];
  
 // Si habia algo almacenado, lo recupero.
 if (productosEnLS) {
     arrayProductos = productosEnLS;
 }
 
-// Almacenar el arrar completo
+// Almacenar el array completo
 
-guardarLocal("listaProductos",JSON.stringify(arrayProductos));
+localStorage.setItem('listaProductos', JSON.stringify(arrayProductos));
 
-productosEnLS = JSON.stringify(localStorage.getItem('listaProductos'))
+var productosEnLS = localStorage.getItem('listaProductos');
+console.log(productosEnLS);
+console.log(arrayProductos);
 
 
 let formulario = document.querySelector("#formulario");
@@ -57,6 +56,7 @@ btnVenta.addEventListener("click", restarStock);
 btnReabast.addEventListener("click", sumarStock);
 btnPrecioNuevo.addEventListener("click", nuevoPrecio);
 btnEliminarProd.addEventListener("click", eliminarProd);
+btnDolar.addEventListener("click", dolarizar);
 
 // Funciones
 
@@ -412,5 +412,63 @@ function ordenPre() {
     for (const producto of ordenPrecio) {
         displayOrdenPre.innerHTML += `<ul><li><p> Nombre: ${producto.nombre}</p>
                                       <p> Precio: ${producto.precio}</p></li></ul>`;
+    }
+}
+
+// Fetch
+
+let dolar = document.querySelector('#dolarAPI');
+
+fetch('https://www.dolarsi.com/api/api.php?type=valoresprincipales')
+    .then((resp) => resp.json())
+    .then((data) => {
+        dolar.innerHTML = `<p><strong> El precio del dolar hoy es de: <strong></p>`
+        dolar.innerHTML += JSON.stringify(data[1].casa.venta);
+        const dato = JSON.stringify(data[1].casa.venta);
+        console.log(JSON.stringify(data[1].casa.venta));
+    })
+    .catch((error) => console.log(error))
+
+// Sistema del dolar
+
+function dolarizar() {
+    let cantDolar = parseFloat(prompt("Ingrese el monto a convertir: "));
+    let divisa = document.querySelector("#moneda");
+
+    if (cantDolar == "") {
+        Swal.fire({
+            title: 'Error!',
+            text: 'Debe completar todos los campos para continuar',
+            icon: 'error',
+            confirmButtonText: ' Intentar de nuevo '
+        })
+    }
+
+    if (isNaN(cantDolar)){
+        Swal.fire({
+            title: 'Error!',
+            text: 'El registro no es un numero',
+            icon: 'error',
+            confirmButtonText: ' Intentar de nuevo '
+        })
+    }
+
+    if (cantDolar < 0) {
+        Swal.fire({
+            title: 'Error!',
+            text: 'La cantidad debe ser mayor a 0',
+            icon: 'error',
+            confirmButtonText: ' Intentar de nuevo '
+        })
+    }
+
+    if (divisa.value == 1) {
+        let convertido1 = cantDolar * data[1].casa.venta ;
+        precioConvert.innerHTML = `<p> El valor es de ${convertido1} ARS</p>`
+    }
+
+    if (divisa.value == 2) {
+        let convertido2 = cantDolar / data[1].casa.venta ;
+        precioConvert.innerHTML = `<p> El valor es de ${convertido2} USD`
     }
 }
