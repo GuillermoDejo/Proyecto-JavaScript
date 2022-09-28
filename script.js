@@ -13,21 +13,14 @@ class Producto {
 
 // Defino las variables
 
-var arrayProductos = [];
+let arrayProductos = [];
+
+let productosEnLS = JSON.parse(localStorage.getItem('listaProductos'));
  
 // Si habia algo almacenado, lo recupero.
 if (productosEnLS) {
     arrayProductos = productosEnLS;
 }
-
-// Almacenar el array completo
-
-localStorage.setItem('listaProductos', JSON.stringify(arrayProductos));
-
-var productosEnLS = localStorage.getItem('listaProductos');
-console.log(productosEnLS);
-console.log(arrayProductos);
-
 
 let formulario = document.querySelector("#formulario");
 let inputNombre = document.querySelector("#iNombre");
@@ -46,6 +39,25 @@ let displayReabast = document.querySelector("#displayReabast");
 let displayPrecio = document.querySelector("#precioNuevo");
 let parrafos = displayTodos.getElementsByTagName("p");
 let bandera = false;
+
+let dolar = document.querySelector('#dolarAPI');
+let data;
+let storage;
+
+// Fetch
+
+fetch('https://www.dolarsi.com/api/api.php?type=valoresprincipales')
+    .then((resp) => resp.json())
+    .then((data) => {
+        dolar.innerHTML = `<p><strong> El precio del dolar hoy es de: <strong></p>`
+        data = data[1].casa.venta
+        dataPro = JSON.stringify(data);
+        dataProMax = JSON.parse(dataPro);
+        dataFinal = parseInt(dataProMax);
+        dolar.innerHTML += dataFinal + ` ARS`;
+        storage = localStorage.setItem("data", JSON.stringify(data));
+    })
+    .catch((error) => console.log(error))
 
 
 // Defino los eventos 
@@ -134,7 +146,9 @@ function agregarProducto(e) {
                         icon: 'success',
                         text: 'El archivo ha sido agregado'
                     })
-                    arrayProductos.push(new Producto(nombreI, precioI, stockI));
+                    let producto = new Producto(nombreI, precioI, stockI)
+                    arrayProductos.push(producto);
+                    localStorage.setItem('listaProductos', JSON.stringify(arrayProductos));
                 } else {
 
                 }
@@ -216,6 +230,7 @@ function restarStock(){
                 } else {
                     cantNuevaRS = cantViejaRS - cantRS;
                     producto.cantidad = cantNuevaRS;
+                    localStorage.setItem('listaProductos', JSON.stringify(arrayProductos));
                 }
             }
         }
@@ -241,6 +256,7 @@ function sumarStock(){
                 cantViejaSS = producto.cantidad;
                 cantNuevaSS = cantViejaSS + cantSS;
                 producto.cantidad = cantNuevaSS;
+                localStorage.setItem('listaProductos', JSON.stringify(arrayProductos));
             }
         }
     }
@@ -263,6 +279,7 @@ function nuevoPrecio(){
             if (nombreNP !== producto.nombre){
             } else {
                 producto.precio = precioNP;
+                localStorage.setItem('listaProductos', JSON.stringify(arrayProductos));
             }
         }
     }
@@ -286,6 +303,7 @@ function eliminarProd(){
                 indexEP ++;
             } else {
                 arrayProductos.splice(indexEP,1);
+                localStorage.setItem('listaProductos', JSON.stringify(arrayProductos));
             }
         }
     }
@@ -415,24 +433,11 @@ function ordenPre() {
     }
 }
 
-// Fetch
-
-let dolar = document.querySelector('#dolarAPI');
-
-fetch('https://www.dolarsi.com/api/api.php?type=valoresprincipales')
-    .then((resp) => resp.json())
-    .then((data) => {
-        dolar.innerHTML = `<p><strong> El precio del dolar hoy es de: <strong></p>`
-        dolar.innerHTML += JSON.stringify(data[1].casa.venta);
-        const dato = JSON.stringify(data[1].casa.venta);
-        console.log(JSON.stringify(data[1].casa.venta));
-    })
-    .catch((error) => console.log(error))
-
 // Sistema del dolar
 
 function dolarizar() {
     let cantDolar = parseFloat(prompt("Ingrese el monto a convertir: "));
+    let storageData = JSON.parse(localStorage.getItem("data"));
     let divisa = document.querySelector("#moneda");
 
     if (cantDolar == "") {
@@ -463,12 +468,12 @@ function dolarizar() {
     }
 
     if (divisa.value == 1) {
-        let convertido1 = cantDolar * data[1].casa.venta ;
+        let convertido1 = cantDolar * (parseInt(storageData));
         precioConvert.innerHTML = `<p> El valor es de ${convertido1} ARS</p>`
     }
 
     if (divisa.value == 2) {
-        let convertido2 = cantDolar / data[1].casa.venta ;
+        let convertido2 = cantDolar / (parseInt(storageData)) ;
         precioConvert.innerHTML = `<p> El valor es de ${convertido2} USD`
     }
 }
