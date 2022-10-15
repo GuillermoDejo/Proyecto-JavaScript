@@ -3,9 +3,14 @@
 /* GENERALES */
 
 body {
-    background-color: black;
-    color: grey;
-    padding: 0rem 1rem;
+    background-color: #111827;
+    color: white;
+    height: 100vh;
+    width: 100vw;
+}
+
+ul li ul li {
+    list-style: square;
 }
 
 /* TITULOS */
@@ -14,16 +19,24 @@ h1,h2 {
     text-align: center;
 }
 
+h1 {
+    padding-top: 1.5rem;
+}
+
 h2 {
-    padding-bottom: 3rem;
+    padding-bottom: 1.5rem;
 }
 
 h3 {
-    padding: 3rem 0rem 1rem 0rem;
+    padding: 1.5rem 0rem 1rem 0rem;
 }
 
 h4 {
-    padding: 3rem 0rem 4rem 0rem; 
+    padding: 1rem 0rem 1rem 0rem; 
+    margin: 1.5rem 13rem 0rem 13rem;
+    text-align: center;
+    font-size:large;
+    background-color: #111827;
 } 
 
 ul {
@@ -40,13 +53,38 @@ ul {
 }
 
 #formulario {
-    height: 300px;
     width: 400px;
     padding: 20px;
     gap: 20px;
     display: flex;
     flex-direction: column;
 }
+
+.divForm {
+    width: 100%;
+    background-color: #161F33;
+    padding: 0rem 1rem;
+}
+
+.divFilter {
+    width: 100%;
+    background-color: #161F33;
+    padding: 0rem 1rem;
+}
+
+.divUtilities {
+    width: 100%;
+    background-color: #161F33;
+    padding: 0rem 1rem;
+}
+
+.divUSD {
+    width: 100%;
+    background-color: #161F33;
+    padding: 0rem 1rem;
+}
+
+
 
 .dolar{
     display: flex;
@@ -59,10 +97,14 @@ ul {
     padding-bottom: 20px;
 }
 
+.div {
+    padding: 0rem 1rem;
+}
+
 /* BOTONES */
 
 select {
-    background-color: grey;
+    background-color: white;
     color: black;
     display: inline-block;
     outline: none;
@@ -83,7 +125,7 @@ select {
 }
 
 .iText {
-    background-color: grey;
+    background-color: white;
     color: black;
     display: inline-block;
     outline: none;
@@ -92,7 +134,7 @@ select {
 }
 
 .iNumber {
-    background-color: grey;
+    background-color: white;
     color: black;
     display: inline-block;
     outline: none;
@@ -128,17 +170,17 @@ select {
     outline: none;
     border-radius: 5px;
     border: none;
-    background: darkgrey;
-    box-shadow: 0 5px grey;
+    background: white;
+    box-shadow: 0 5px lightgrey;
 }
 
 .boton:hover {
-    box-shadow: 0 3px grey;
+    box-shadow: 0 3px lightgrey;
     top: 1px;
 }
 
 .boton:active {
-    box-shadow: 0 0 grey;
+    box-shadow: 0 0 lightgrey;
     top: 5px;
   }
 

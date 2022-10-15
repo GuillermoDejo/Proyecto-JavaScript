@@ -12,85 +12,95 @@
 <body>
     <h1>Base de Datos</h1>
     <h2>Inventario</h2>
-    <h3>Filtros de busqueda:</h3>
-    <div class="buttons">
-        <input id="pocoStock" class="boton" type="button" value="Poco Stock" onclick="bajoStock();"/>
-        <input id="sinStock" class="boton" type="button" value="Sin Stock" onclick="noStock();"/>
-        <input id="buscador" class="boton" type="button" value="Buscador por nombre" onclick="buscador();"/>
-        <input id="ordenCant" class="boton" type="button" value="Ordenados por cantidad" onclick="ordenCant();"/>
-        <input id="ordenPre" class="boton" type="button" value="Ordenados por precio" onclick="ordenPre();"/>
+    <div class="divForm">
+        <h3> Ingrese los datos del producto a agregar:</h3>
+        <div class="ingreso">
+            <form id="formulario">
+                <label> Nombre del producto: </label>
+                <input class="iText" type="text" name="nombre" id="iNombre">
+
+                <label> Precio del producto: </label>
+                <input class="iNumber" type="number" name="precio" id="iPrecio">
+
+                <label> Stock del producto: </label>
+                <input class="iNumber" type="number" name="cantidad" id="iStock">
+
+                <div id="buttonsForm">
+                    <input type="submit" id="btnSubmit" class="boton" value="Confirmar">
+                    <input type="button" id="btnMostrar" class="boton" value="Mostrar">
+                </div>
+            </form>
+        </div>
+        <h4> CADA VEZ QUE ACTUALICE UN PRODUCTO DEBERA PRESIONAR EL BOTON MOSTRAR PARA REFLEJAR EL CAMBIO </h4>
     </div>
-    <h3> Ingrese los datos del producto a agregar:</h3>
-    <div class="ingreso">
-        <form id="formulario">
-            <label> Nombre del producto: </label>
-            <input class="iText" type="text" name="nombre" id="iNombre">
+    <div class="divUtilities">
+        <h3>Utilidades:</h3>
+        <div id="buttonsForm" class="utilidades">
+            <input type="button" id="btnVenta" class="boton" value="Venta">
+            <input type="button" id="btnReabast" class="boton" value="Reabastecimiento">
+            <input type="button" id="btnPrecioNuevo" class="boton" value="Actualizar Precio">
+            <input type="button" id="btnEliminarProd" class="boton" value="Eliminar producto">
+        </div>
+    </div>
+    <div class="divUSD">
+        <h3>Conversion de moneda:</h3>
+        <div class="dolar">
+            <div id="dolarAPI">
 
-            <label> Precio del producto: </label>
-            <input class="iNumber" type="number" name="precio" id="iPrecio">
-
-            <label> Stock del producto: </label>
-            <input class="iNumber" type="number" name="cantidad" id="iStock">
-
-            <div id="buttonsForm">
-                <input type="submit" id="btnSubmit" class="boton" value="Confirmar">
-                <input type="button" id="btnMostrar" class="boton" value="Mostrar">
             </div>
-        </form>
-    </div>
-    <h3>Utilidades:</h3>
-    <div id="buttonsForm" class="utilidades">
-        <input type="button" id="btnVenta" class="boton" value="Venta">
-        <input type="button" id="btnReabast" class="boton" value="Reabastecimiento">
-        <input type="button" id="btnPrecioNuevo" class="boton" value="Actualizar Precio">
-        <input type="button" id="btnEliminarProd" class="boton" value="Eliminar producto">
-    </div>
-    <h3>Conversion de moneda:</h3>
-    <div class="dolar">
-        <div id="dolarAPI">
+            <label> Divisa del precio ingresado: </label>
+            <select name="Moneda" id="moneda">
+                <option value="1"> USD</option>
+                <option value="2"> ARS</option>
+            </select>
+            <input type="button" id="btnDolar" class="boton" value="Convertir precio">
+            <div id="precioConvert">
 
-        </div>
-        <label> Divisa del precio ingresado: </label>
-        <select name="Moneda" id="moneda">
-            <option value="1"> USD</option>
-            <option value="2"> ARS</option>
-        </select>
-        <input type="button" id="btnDolar" class="boton" value="Convertir precio">
-        <div id="precioConvert">
-
+            </div>
         </div>
     </div>
-    <div id="productoIngresado">
+    <div class="divFilter">
+        <h3>Filtros de busqueda:</h3>
+        <div class="buttons">
+            <input id="pocoStock" class="boton" type="button" value="Poco Stock" onclick="bajoStock();"/>
+            <input id="sinStock" class="boton" type="button" value="Sin Stock" onclick="noStock();"/>
+            <input id="buscador" class="boton" type="button" value="Buscador por nombre" onclick="buscador();"/>
+            <input id="ordenCant" class="boton" type="button" value="Ordenados por cantidad" onclick="ordenCant();"/>
+            <input id="ordenPre" class="boton" type="button" value="Ordenados por precio" onclick="ordenPre();"/>
+        </div>
+    </div>
+
+    <div id="productoIngresado" class="div">
 
     </div>
-    <div id="displayTodos">
+    <div id="displayTodos" class="div">
 
     </div>
-    <div id="displayPocoStock">
+    <div id="displayPocoStock" class="div">
 
     </div>
-    <div id="displaySinStock">
+    <div id="displaySinStock" class="div">
 
     </div>
-    <div id="displayBuscador">
+    <div id="displayBuscador" class="div">
 
     </div>
-    <div id="displayOrdenCant">
+    <div id="displayOrdenCant" class="div">
 
     </div>
-    <div id="displayOrdenPre">
+    <div id="displayOrdenPre" class="div">
 
     </div>
-    <div id="displayVenta">
+    <div id="displayVenta" class="div">
 
     </div>
-    <div id="displayReabast">
+    <div id="displayReabast" class="div">
 
     </div>
-    <div id="precioNuevo">
+    <div id="precioNuevo" class="div">
         
     </div>
-    <div id="eliminarProd">
+    <div id="eliminarProd" class="div">
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>

@@ -176,8 +176,8 @@ function agregarAlDom() {
     displayPrecio.innerHTML = ``;
     ingreso.innerHTML = `<h3> Ultimo producto agregado: </h3>
                             <ul><li><p> Nombre: ${nombreI}</p>
-                            <p> Cantidad: ${stockI}</p>
-                            <p> Precio: ${precioI}</p></li></ul>`;
+                            <ul><li><p> Cantidad: ${stockI}</p></li>
+                            <li><p> Precio: ${precioI}</p></li></ul></li></ul>`;
 }
 
 // Funcion para mostrar todos los productos
@@ -194,12 +194,11 @@ function mostrarProductos(e) {
     displayVenta.innerHTML = ``;
     displayReabast.innerHTML = ``;
     displayPrecio.innerHTML = ``;
-    displayTodos.innerHTML = `<h3> Listado de todos los productos: </h3>
-                              <h4> CADA VEZ QUE ACTUALICE UN PRODUCTO DEBERA PRESIONAR EL BOTON MOSTRAR PARA REFLEJAR EL CAMBIO </h4>`;
+    displayTodos.innerHTML = `<h3> Listado de todos los productos: </h3>`;
     for (const producto of arrayProductos) {
         displayTodos.innerHTML += `<ul><li><p> Nombre: ${producto.nombre}</p>
-                                    <p> Cantidad: ${producto.cantidad}</p>
-                                    <p> Precio: ${producto.precio}</p></li></ul>`;
+                                    <ul><li><p> Cantidad: ${producto.cantidad}</p></li>
+                                    <li><p> Precio: ${producto.precio}</p></li></ul></li></ul>`;
     }
 }
 
@@ -327,7 +326,7 @@ function bajoStock () {
 
     for (const producto of bajoStock) {
         displayPocoStock.innerHTML += `<ul><li><p> Nombre: ${producto.nombre}</p>
-                                    <p> Cantidad: ${producto.cantidad}</p></li></ul>`;
+                                    <ul><li><p> Cantidad: ${producto.cantidad}</p></li></ul></li></ul>`;
     }
 }
 
@@ -349,7 +348,7 @@ function noStock() {
 
     for (const producto of sinStock) {
         displaySinStock.innerHTML += `<ul><li><p> Nombre: ${producto.nombre}</p>
-                                    <p> Cantidad: ${producto.cantidad}</p></li></ul>`;
+                                    <ul><li><p> Cantidad: ${producto.cantidad}</p></li></ul></li></ul>`;
     }
 }
 
@@ -372,8 +371,8 @@ function buscador() {
 
     for (const producto of prodIngresado) {
         displayBuscador.innerHTML += `<ul><li><p> Nombre: ${producto.nombre}</p>
-                                    <p> Cantidad: ${producto.cantidad}</p>
-                                    <p> Precio: ${producto.precio}</p></li></ul>`;
+                                    <ul><li><p> Cantidad: ${producto.cantidad}</p></li>
+                                    <li><p> Precio: ${producto.precio}</p></li></ul></li></ul>`;
     }
 }
 
@@ -400,7 +399,7 @@ function ordenCant(){
 
     for (const producto of ordenCantidad) {
         displayOrdenCant.innerHTML += `<ul><li><p> Nombre: ${producto.nombre}</p>
-                                    <p> Cantidad: ${producto.cantidad}</p></li></ul>`;
+                                    <ul><li><p> Cantidad: ${producto.cantidad}</p></li></ul></li></ul>`;
     }
 }
 
@@ -429,7 +428,7 @@ function ordenPre() {
 
     for (const producto of ordenPrecio) {
         displayOrdenPre.innerHTML += `<ul><li><p> Nombre: ${producto.nombre}</p>
-                                      <p> Precio: ${producto.precio}</p></li></ul>`;
+                                      <ul><li><p> Precio: ${producto.precio}</p></li></ul></li></ul>`;
     }
 }
 
